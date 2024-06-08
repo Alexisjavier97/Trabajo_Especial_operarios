@@ -1,7 +1,8 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-def simular(N, S, TF, TR, Operarios):
+def simular(N: int, S: int, TF: float, TR: float, Operarios: int):
+	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0)
 	cajas_a_reparar = 0 # numero de cajas en reparacion
 	registro_de_tiempo = 0 # registra el tiempo desde el inicio hasta el momento en que el sistema deja de ser operativo
     
@@ -9,7 +10,7 @@ def simular(N, S, TF, TR, Operarios):
 	while cajas_a_reparar <=S:
     	# Se considera por separado el caso donde no hay cajas en reparación para evitar la división por 0
 		if cajas_a_reparar == 0:
-			registro_de_tiempo += np.random.exponential(N/TF)
+			registro_de_tiempo += np.random.exponential(TF/N)
 			cajas_a_reparar += 1
             
 		m = min(Operarios, cajas_a_reparar) # Cantidad de máquinas siendo reparadas
@@ -26,7 +27,8 @@ def simular(N, S, TF, TR, Operarios):
 			registro_de_tiempo += Y
 	return registro_de_tiempo
 
-def estimar(N, S, TF, TR, Operarios, NSim):
+def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int):
+	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0 and NSim > 0)
 	media = 0
 	muestra = [] # Se almacenan los datos de la simulación para estimar la varianza y para hacer histogramas.
 	# Se estima la media con Monte Carlo.
@@ -42,7 +44,8 @@ def estimar(N, S, TF, TR, Operarios, NSim):
 	desviacion_estandar = (suma / (NSim - 1))**0.5
 	return media, desviacion_estandar, muestra
 
-def histogramas(muestras, bins = 100):
+def histogramas(muestras: tuple, bins = 20):
+	assert(len(muestras) == 2);
 	# Muestra dos histogramas de dos muestras distintas en el mismo gráfico.
 	fig, axs = plt.subplots(1, 1)
 	axs.hist(muestras, bins = bins, color = ["red", "lime"])
