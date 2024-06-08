@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-def simular(N: int, S: int, TF: float, TR: float, Operarios: int):
+def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
 	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0)
 	cajas_a_reparar = 0 # numero de cajas en reparacion
 	registro_de_tiempo = 0 # registra el tiempo desde el inicio hasta el momento en que el sistema deja de ser operativo
@@ -27,7 +27,7 @@ def simular(N: int, S: int, TF: float, TR: float, Operarios: int):
 			registro_de_tiempo += Y
 	return registro_de_tiempo
 
-def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int):
+def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> tuple:
 	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0 and NSim > 0)
 	media = 0
 	muestra = [] # Se almacenan los datos de la simulación para estimar la varianza y para hacer histogramas.
@@ -44,10 +44,16 @@ def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int):
 	desviacion_estandar = (suma / (NSim - 1))**0.5
 	return media, desviacion_estandar, muestra
 
-def histogramas(muestras: tuple, bins = 20):
-	assert(len(muestras) == 2);
+def histogramas(muestra1: list, muestra2: list, bins = 40):
 	# Muestra dos histogramas de dos muestras distintas en el mismo gráfico.
-	fig, axs = plt.subplots(1, 1)
-	axs.hist(muestras, bins = bins, color = ["red", "lime"])
+	fig, axs = plt.subplots()
+	axs.hist((muestra1, muestra2), bins = bins, color = ["red", "lime"])
 	plt.show()
 
+def histogramas_2(muestra1: list, muestra2: list, bins = 40):
+	fig, axs = plt.subplots(1, 2)
+	axs[0].set_xlim(0, 25)
+	axs[1].set_xlim(0, 25)
+	axs[0].hist(muestra1, bins=bins)
+	axs[1].hist(muestra2, bins=bins)
+	plt.show()
