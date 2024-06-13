@@ -1,6 +1,9 @@
 import numpy as np
 from matplotlib import pyplot as plt
-
+'''
+ Esta funcion calcula el tiempo total de operación de un sistema de cajas antes de 
+ que se vuelva no operativo debido a un exceso de cajas en reparación.
+'''
 def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
 	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0)
 	cajas_a_reparar = 0 # numero de cajas en reparacion
@@ -26,7 +29,9 @@ def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
 			cajas_a_reparar -= 1
 			registro_de_tiempo += Y
 	return registro_de_tiempo
-
+'''Esta funcion utiliza la simulación de Monte Carlo para 
+calcular el tiempo promedio de operación de un sistema de cajas y su desviación estándar 
+'''
 def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> tuple:
 	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0 and NSim > 0)
 	media = 0
