@@ -1,10 +1,8 @@
 import numpy as np
 from matplotlib import pyplot as plt
-'''
- Esta funcion calcula el tiempo total de operación de un sistema de cajas antes de 
- que se vuelva no operativo debido a un exceso de cajas en reparación.
-'''
+
 def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
+	"""Simula el tiempo que tarda el supermercado en dejar de ser operativo."""
 	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0)
 	cajas_a_reparar = 0 # numero de cajas en reparacion
 	registro_de_tiempo = 0 # registra el tiempo desde el inicio hasta el momento en que el sistema deja de ser operativo
@@ -29,9 +27,10 @@ def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
 			cajas_a_reparar -= 1
 			registro_de_tiempo += Y
 	return registro_de_tiempo
-#Esta funcion calcular el tiempo promedio de operación de un sistema de cajas y su desviación estándar 
 
 def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> tuple:
+	"""Estima el tiempo medio de fallo del supermercado mediante el método de Monte Carlo y su desviación estándar.
+ 	Devuelve además la muestra generada para poder realizar un histograma."""
 	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0 and NSim > 0)
 	media = 0
 	muestra = [] # Se almacenan los datos de la simulación para estimar la varianza y para hacer histogramas.
@@ -49,12 +48,14 @@ def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> 
 	return media, desviacion_estandar, muestra
 
 def histogramas(muestra1: list, muestra2: list, bins = 40):
+	"""Genera dos histogramas de dos muestras distintas en un mismo gráfico."""
 	# Muestra dos histogramas de dos muestras distintas en el mismo gráfico.
 	fig, axs = plt.subplots()
 	axs.hist((muestra1, muestra2), bins = bins, color = ["red", "lime"])
 	plt.show()
 
 def histogramas_2(muestra1: list, muestra2: list, bins = 40):
+	"""Genera dos histogramas de dos muestras distintas uno al lado del otro."""
 	fig, axs = plt.subplots(1, 2)
 	axs[0].set_xlim(0, 25)
 	axs[1].set_xlim(0, 25)
