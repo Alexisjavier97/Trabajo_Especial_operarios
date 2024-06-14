@@ -49,7 +49,6 @@ def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> 
 
 def histogramas(muestra1: list, muestra2: list, bins = 40):
 	"""Genera dos histogramas de dos muestras distintas en un mismo gráfico."""
-	# Muestra dos histogramas de dos muestras distintas en el mismo gráfico.
 	fig, axs = plt.subplots()
 	axs.hist((muestra1, muestra2), bins = bins, color = ["red", "lime"])
 	plt.show()
