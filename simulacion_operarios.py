@@ -29,18 +29,18 @@ def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
 	return registro_de_tiempo
 
 def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> tuple:
-	"""Estima el tiempo medio de fallo del supermercado mediante el método de Monte Carlo y su desviación estándar.
+	"""Estima el tiempo medio de fallo del supermercado mediante el método de Monte Carlo y su desviación estándar con la raíz cuadrada de la varianza muestral.
  	Devuelve además la muestra generada para poder realizar un histograma."""
 	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0 and NSim > 0)
 	media = 0
-	muestra = [] # Se almacenan los datos de la simulación para estimar la varianza y para hacer histogramas.
+	muestra = []
 	# Se estima la media con Monte Carlo.
 	for _ in range(NSim):
 		x_i = simular(N, S, TF, TR, Operarios)
 		media += x_i
 		muestra.append(x_i)
 	media = media /NSim
-	# Se estima la desviación estándar con el estimador de máxima verosimilitud.
+	# Calcula la varianza muestral.
 	suma = 0
 	for i in range(NSim):
 		suma += (muestra[i] - media)**2
