@@ -51,6 +51,12 @@ def histogramas(muestra1: list, muestra2: list, bins = 40):
 	"""Genera dos histogramas de dos muestras distintas en un mismo gráfico."""
 	fig, axs = plt.subplots()
 	axs.hist((muestra1, muestra2), bins = bins, color = ["red", "lime"])
+	plt.xlabel("Tiempo de vida del supermercado (meses)")
+	plt.ylabel("Frecuencia de ocurrencias")
+	plt.title("Histograma de dos muestras")
+	plt.hist(muestra1, density=True, label='1 opeario',color='red')
+	plt.hist(muestra2, density=True, label='2 opearios',color='lime')
+	plt.legend(loc='upper right')
 	plt.show()
 
 def histogramas_2(muestra1: list, muestra2: list, bins = 40):
@@ -60,4 +66,13 @@ def histogramas_2(muestra1: list, muestra2: list, bins = 40):
 	axs[1].set_xlim(0, 25)
 	axs[0].hist(muestra1, bins=bins)
 	axs[1].hist(muestra2, bins=bins)
+	axs[0].set_xlabel('Tiempo de vida del supermercado (meses)')
+	axs[0].set_ylabel('Frecuencia de ocurrencia')
+
+	axs[1].set_xlabel('Tiempo de vida del supermercado (meses)')
+	axs[1].set_ylabel('Frecuencia de ocurrencia')
+	
+	plt.hist(muestra1, density=True, label='1 opeario',color='red')
+	plt.hist(muestra2, density=True, label='2 opearios',color='lime')
+	plt.legend(loc='upper right')
 	plt.show()
