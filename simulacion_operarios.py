@@ -57,6 +57,7 @@ def histogramas(muestra1: list, muestra2: list, bins = 40):
 	plt.hist(muestra1, density=True, label='1 opeario',color='red')
 	plt.hist(muestra2, density=True, label='2 opearios',color='lime')
 	plt.legend(loc='upper right')
+	plt.grid(True)
 	plt.show()
 
 def histogramas_2(muestra1: list, muestra2: list, bins = 40):
@@ -64,8 +65,8 @@ def histogramas_2(muestra1: list, muestra2: list, bins = 40):
 	fig, axs = plt.subplots(1, 2)
 	axs[0].set_xlim(0, 25)
 	axs[1].set_xlim(0, 25)
-	axs[0].hist(muestra1, bins=bins)
-	axs[1].hist(muestra2, bins=bins)
+	axs[0].hist(muestra1, bins=bins,edgecolor = 'black',color = "red")
+	axs[1].hist(muestra2, bins=bins,edgecolor = 'black',color  = "lime")
 	axs[0].set_xlabel('Tiempo de vida del supermercado (meses)')
 	axs[0].set_ylabel('Frecuencia de ocurrencia')
 
@@ -73,6 +74,8 @@ def histogramas_2(muestra1: list, muestra2: list, bins = 40):
 	axs[1].set_ylabel('Frecuencia de ocurrencia')
 	
 	plt.hist(muestra1, density=True, label='1 opeario',color='red')
+	axs[0].grid(True)
 	plt.hist(muestra2, density=True, label='2 opearios',color='lime')
+	axs[1].grid(True)
 	plt.legend(loc='upper right')
 	plt.show()
