@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
+from numpy import arange
 
 def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
 	"""Simula el tiempo que tarda el supermercado en dejar de ser operativo."""
@@ -28,7 +29,7 @@ def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
 			registro_de_tiempo += Y
 	return registro_de_tiempo
 
-def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> tuple:
+def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> tuple[float, float, list]:
 	"""Estima el tiempo medio de fallo del supermercado mediante el método de Monte Carlo y su desviación estándar con la raíz cuadrada de la varianza muestral.
  	Devuelve además la muestra generada para poder realizar un histograma."""
 	assert(N > 0 and S > 0 and TF > 0 and TR > 0 and Operarios > 0 and NSim > 0)
@@ -47,35 +48,43 @@ def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> 
 	desviacion_estandar = (suma / (NSim - 1))**0.5
 	return media, desviacion_estandar, muestra
 
-def histogramas(muestra1: list, muestra2: list, bins = 40):
+def histogramas(muestra1: list, muestra2: list, bins = 40, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
 	"""Genera dos histogramas de dos muestras distintas en un mismo gráfico."""
+	max_data = max(max(muestra1), max(muestra2))
 	fig, axs = plt.subplots()
-	axs.hist((muestra1, muestra2), bins = bins, color = ["red", "lime"])
+	axs.hist((muestra1, muestra2), bins = arange(0, max_data + bin_width, bin_width), color = ["red", "lime"])
 	plt.xlabel("Tiempo de vida del supermercado (meses)")
-	plt.ylabel("Frecuencia de ocurrencias")
+	plt.ylabel("Frecuencias")
 	plt.title("Histograma de dos muestras")
-	plt.hist(muestra1, density=True, label='1 opeario',color='red')
-	plt.hist(muestra2, density=True, label='2 opearios',color='lime')
+	plt.hist(muestra1, density=True, label=label1 ,color='red')
+	plt.hist(muestra2, density=True, label=label2 ,color='lime')
 	plt.legend(loc='upper right')
 	plt.grid(True)
 	plt.show()
 
-def histogramas_2(muestra1: list, muestra2: list, bins = 40):
+def histogramas_2(muestra1: list, muestra2: list, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
 	"""Genera dos histogramas de dos muestras distintas uno al lado del otro."""
+	max_data = max(max(muestra1), max(muestra2))
 	fig, axs = plt.subplots(1, 2)
-	axs[0].set_xlim(0, 25)
-	axs[1].set_xlim(0, 25)
-	axs[0].hist(muestra1, bins=bins,edgecolor = 'black',color = "red")
-	axs[1].hist(muestra2, bins=bins,edgecolor = 'black',color  = "lime")
+	axs[0].hist(muestra1, bins=arange(0, max_data + bin_width, bin_width), edgecolor = 'black',color = "red")
+	axs[0].set_xlim(0, max_data)
 	axs[0].set_xlabel('Tiempo de vida del supermercado (meses)')
-	axs[0].set_ylabel('Frecuencia de ocurrencia')
+	axs[0].set_ylabel('Frecuencias')
+	y1 = axs[0].get_ylim()[1]
 
+	axs[1].hist(muestra2, bins=arange(0, max_data + bin_width, bin_width), edgecolor = 'black',color  = "lime")
+	axs[1].set_xlim(0, max_data)
 	axs[1].set_xlabel('Tiempo de vida del supermercado (meses)')
-	axs[1].set_ylabel('Frecuencia de ocurrencia')
+	axs[1].set_ylabel('Frecuencias')
+	y2 = axs[1].get_ylim()[1]
 	
-	plt.hist(muestra1, density=True, label='1 opeario',color='red')
+	max_y = max(y1, y2)
+	axs[0].set_ylim(0, max_y)
+	axs[1].set_ylim(0, max_y)	
+	
+	plt.hist(muestra1, density=True, label=label1, color='red')
 	axs[0].grid(True)
-	plt.hist(muestra2, density=True, label='2 opearios',color='lime')
+	plt.hist(muestra2, density=True, label=label2, color='lime')
 	axs[1].grid(True)
 	plt.legend(loc='upper right')
 	plt.show()
