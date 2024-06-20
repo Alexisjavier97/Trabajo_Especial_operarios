@@ -92,7 +92,7 @@ def histograma2():
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
 	
-	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", "2 operarios, S = 3")
+	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "2 operarios, S = 3")
 
 def histograma3():	
 	"""Genera un Histograma de comparación de dos operarios en paralelo con tres cajas de repuesto y
