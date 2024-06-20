@@ -83,7 +83,7 @@ def histograma2():
 	Tambien muestra la desviacion estandar generada y su media muestral para cada caso"""
 	muestra1=estimar(7,3,1,1/8,1,10000)
 	muestra2=estimar(7,3,1,1/8,2,10000)
-
+	
 	print("Un Operario considerando 3 cajas de repuesto (Rojo) ")
 	print("    Media muestral: ",muestra1[0])
 	print("    Desviacion estandar: ",muestra1[1])
@@ -120,18 +120,13 @@ def mostrar_menu():
 	print("    4. Salir\n")
 
 def main():
-	mostrar_menu()
-
-while True:
+	while True:
 		mostrar_menu()
 		opcion = input("    Ingrese su opción: ")
-
 		if opcion == '1':
 			histograma1()
-
 		elif opcion == '2':
 			histograma2()
-
 		elif opcion == '3':
 			histograma3()
 		elif opcion == '4':
