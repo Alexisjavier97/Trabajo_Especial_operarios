@@ -1,6 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from numpy import arange
+import os
 
 def simular(N: int, S: int, TF: float, TR: float, Operarios: int) -> float:
 	"""Simula el tiempo que tarda el supermercado en dejar de ser operativo."""
@@ -68,14 +69,14 @@ def histograma1():
 	muestra1=estimar(7,3,1,1/8,1,10000)
 	muestra2=estimar(7,4,1,1/8,1,10000)
 
-	print("Un Operario considerando 3 cajas de repuesto (Rojo) ")
+	print("\nUn Operario considerando 3 cajas de repuesto (Rojo) ")
 	print("    Media muestral: ",muestra1[0])
 	print("    Desviacion estandar: ",muestra1[1])
 
-	print("Un Operario considerando 4 cajas de repuesto (Verde) ")
+	print("\nUn Operario considerando 4 cajas de repuesto (Verde) ")
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
-	
+	print("\n")
 	generar_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "1 operario, S = 4")
 
 def histograma2():
@@ -84,14 +85,14 @@ def histograma2():
 	muestra1=estimar(7,3,1,1/8,1,10000)
 	muestra2=estimar(7,3,1,1/8,2,10000)
 	
-	print("Un Operario considerando 3 cajas de repuesto (Rojo) ")
+	print("\nUn Operario considerando 3 cajas de repuesto (Rojo) ")
 	print("    Media muestral: ",muestra1[0])
 	print("    Desviacion estandar: ",muestra1[1])
 
-	print("Dos Operarios considerando 3 cajas de repuesto (Verde) ")
+	print("\nDos Operarios considerando 3 cajas de repuesto (Verde) ")
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
-	
+	print("\n")
 	generar_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "2 operarios, S = 3")
 
 def histograma3():	
@@ -101,14 +102,14 @@ def histograma3():
 	muestra1=estimar(7,4,1,1/8,1,10000)
 	muestra2=estimar(7,3,1,1/8,2,10000)
 
-	print("Un Operario con S = 4 (Rojo) ")
+	print("\nUn Operario con S = 4 (Rojo) ")
 	print("    Media muestral: ",muestra1[0])
 	print("    Desviacion estandar: ",muestra1[1])
 
-	print("Dos Operarios con S = 3 (Verde) ")
+	print("\nDos Operarios con S = 3 (Verde) ")
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
-	
+	print("\n")
 	generar_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 4", label2 = "2 operarios, S = 1")
 
 def mostrar_menu():
@@ -117,7 +118,8 @@ def mostrar_menu():
 	print("    1. Mostrar resultados con 1 operario, S = 3 y 1 operario, S = 4.\n")
 	print("    2. Mostrar resultados con 1 operario, S = 3 y 2 operarios, S = 3.\n")
 	print("    2. Mostrar resultados con 2 operarios, S = 3 y 1 operarios, S = 4.\n")
-	print("    4. Salir\n")
+	print("    4. Limpiar pantalla\n")
+	print("    5. Salir\n")
 
 def main():
 	while True:
@@ -130,7 +132,8 @@ def main():
 		elif opcion == '3':
 			histograma3()
 		elif opcion == '4':
-			print("Saliendo del programa...")
+			histograma3()	
+		elif opcion == '5':
 			break
 		else:
 			print("Opción no válida. Por favor, ingrese una opción válida.")
