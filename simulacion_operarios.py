@@ -110,7 +110,7 @@ def histograma3():
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
 	print("\n")
-	generar_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 4", label2 = "2 operarios, S = 1")
+	generar_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 4", label2 = "2 operarios, S = 3")
 
 def mostrar_menu():
 	print("\nSeleccione el histograma y sus resultados que desea ver: \n")	
