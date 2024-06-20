@@ -48,7 +48,7 @@ def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> 
 	desviacion_estandar = (suma / (NSim - 1))**0.5
 	return media, desviacion_estandar, muestra
 
-def genera_histograma(muestra1: list, muestra2: list, bins = 40, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
+def genera_histograma(muestra1: list, muestra2: list, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
 	"""Genera dos histogramas de dos muestras distintas en un mismo gráfico."""
 	max_data = max(max(muestra1), max(muestra2))
 	fig, axs = plt.subplots()
@@ -62,11 +62,9 @@ def genera_histograma(muestra1: list, muestra2: list, bins = 40, label1 = "1 ope
 	plt.grid(True)
 	plt.show()
 
-Genera un Histograma de comparación de un operario con S=3 máquinas de repuesto y S=4 máquinas de repuesto
-Tambien muestra la desviacion estandar generada y su media muestral para cada caso
-'''
 def histograma1():
-
+"""Genera un Histograma de comparación de un operario con S=3 máquinas de repuesto y S=4 máquinas de repuesto
+Tambien muestra la desviacion estandar generada y su media muestral para cada caso"""
 	muestra1=estimar(7,3,1,1/8,1,10000)
 	muestra2=estimar(7,4,1,1/8,1,10000)
 
@@ -78,14 +76,11 @@ def histograma1():
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
 	
-	genera_histograma(muestra1[2],muestra2[2])
+	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "1 operario, S = 4")
 
-'''
-Genera un Histograma de comparación de un operario y dos operarios con S=3 para ambos casos
-Tambien muestra la desviacion estandar generada y su media muestral para cada caso
-'''
 def histograma2():
-
+"""Genera un Histograma de comparación de un operario y dos operarios con S=3 para ambos casos
+Tambien muestra la desviacion estandar generada y su media muestral para cada caso"""
 	muestra1=estimar(7,3,1,1/8,1,10000)
 	muestra2=estimar(7,3,1,1/8,2,10000)
 
@@ -97,42 +92,34 @@ def histograma2():
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
 	
-	genera_histograma(muestra1[2],muestra2[2])
+	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", "2 operarios, S = 3")
 
-'''
-Genera un Histograma de comparación de dos operarios en paralelo con tres cajas de repuesto y
-un operario con cuatro cajas de repuesto. Tambien muestra la desviacion estandar generada y su media muestral
-para cada caso
-'''
 def histograma3():	
+"""Genera un Histograma de comparación de dos operarios en paralelo con tres cajas de repuesto y
+un operario con cuatro cajas de repuesto. Tambien muestra la desviacion estandar generada y su media muestral
+para cada caso"""
+	muestra1=estimar(7,4,1,1/8,1,10000)
+	muestra2=estimar(7,3,1,1/8,2,10000)
 
-	muestra1=estimar(7,3,1,1/8,1,10000)
-	muestra2=estimar(7,4,2,1/8,1,10000)
-
-	print("Un Operario considerando 4 cajas de repuestos (Rojo) ")
+	print("Un Operario con S = 4 (Rojo) ")
 	print("    Media muestral: ",muestra1[0])
 	print("    Desviacion estandar: ",muestra1[1])
 
-	print("Dos Operarios considerando 3 cajas de repuestos (Verde) ")
+	print("Dos Operarios con S = 3 (Verde) ")
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
 	
-	genera_histograma(muestra1[2],muestra2[2])
+	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 4", label2 = "2 operarios, S = 1")
 
 def mostrar_menu():
 	print("\nSeleccione el histograma y sus resultados que desea ver: \n")	
 
-	print("""    1. Histograma comparativo de 1 operario con S=3  y S=4 \n""")
-
-	print("""    2. Histograma comparativo de 1 y 2 operarios con S iguales\n""")
-    
-	print("""    3. Histograma comparativo de 2 operarios  con S=3 y 1 operario con S=4\n""")
-    
+	print("    1. Mostrar resultados con 1 operario, S = 3 y 1 operario, S = 4.\n")
+	print("    2. Mostrar resultados con 1 operario, S = 3 y 2 operarios, S = 3.\n")
+	print("    2. Mostrar resultados con 2 operarios, S = 3 y 1 operarios, S = 4.\n")
 	print("    4. Salir\n")
 
 def main():
-    
-	print("Informe de comparación de resultados del experimento")
 	mostrar_menu()
 
 while True:
