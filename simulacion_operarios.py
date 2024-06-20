@@ -63,8 +63,8 @@ def genera_histograma(muestra1: list, muestra2: list, label1 = "1 operario", lab
 	plt.show()
 
 def histograma1():
-"""Genera un Histograma de comparación de un operario con S=3 máquinas de repuesto y S=4 máquinas de repuesto
-Tambien muestra la desviacion estandar generada y su media muestral para cada caso"""
+	"""Genera un Histograma de comparación de un operario con S=3 máquinas de repuesto y S=4 máquinas de repuesto
+	Tambien muestra la desviacion estandar generada y su media muestral para cada caso"""
 	muestra1=estimar(7,3,1,1/8,1,10000)
 	muestra2=estimar(7,4,1,1/8,1,10000)
 
@@ -79,8 +79,8 @@ Tambien muestra la desviacion estandar generada y su media muestral para cada ca
 	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "1 operario, S = 4")
 
 def histograma2():
-"""Genera un Histograma de comparación de un operario y dos operarios con S=3 para ambos casos
-Tambien muestra la desviacion estandar generada y su media muestral para cada caso"""
+	"""Genera un Histograma de comparación de un operario y dos operarios con S=3 para ambos casos
+	Tambien muestra la desviacion estandar generada y su media muestral para cada caso"""
 	muestra1=estimar(7,3,1,1/8,1,10000)
 	muestra2=estimar(7,3,1,1/8,2,10000)
 
@@ -95,9 +95,9 @@ Tambien muestra la desviacion estandar generada y su media muestral para cada ca
 	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", "2 operarios, S = 3")
 
 def histograma3():	
-"""Genera un Histograma de comparación de dos operarios en paralelo con tres cajas de repuesto y
-un operario con cuatro cajas de repuesto. Tambien muestra la desviacion estandar generada y su media muestral
-para cada caso"""
+	"""Genera un Histograma de comparación de dos operarios en paralelo con tres cajas de repuesto y
+	un operario con cuatro cajas de repuesto. Tambien muestra la desviacion estandar generada y su media muestral
+	para cada caso"""
 	muestra1=estimar(7,4,1,1/8,1,10000)
 	muestra2=estimar(7,3,1,1/8,2,10000)
 
