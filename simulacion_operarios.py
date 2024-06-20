@@ -117,7 +117,7 @@ def mostrar_menu():
 
 	print("    1. Mostrar resultados con 1 operario, S = 3 y 1 operario, S = 4.\n")
 	print("    2. Mostrar resultados con 1 operario, S = 3 y 2 operarios, S = 3.\n")
-	print("    2. Mostrar resultados con 2 operarios, S = 3 y 1 operarios, S = 4.\n")
+	print("    3. Mostrar resultados con 2 operarios, S = 3 y 1 operarios, S = 4.\n")
 	print("    4. Limpiar pantalla\n")
 	print("    5. Salir\n")
 
@@ -132,7 +132,7 @@ def main():
 		elif opcion == '3':
 			histograma3()
 		elif opcion == '4':
-			histograma3()	
+			_ = os.system('clear')
 		elif opcion == '5':
 			break
 		else:
