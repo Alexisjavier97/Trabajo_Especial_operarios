@@ -48,7 +48,7 @@ def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> 
 	desviacion_estandar = (suma / (NSim - 1))**0.5
 	return media, desviacion_estandar, muestra
 
-def histogramas(muestra1: list, muestra2: list, bins = 40, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
+def genera_histograma(muestra1: list, muestra2: list, bins = 40, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
 	"""Genera dos histogramas de dos muestras distintas en un mismo gráfico."""
 	max_data = max(max(muestra1), max(muestra2))
 	fig, axs = plt.subplots()
@@ -62,29 +62,96 @@ def histogramas(muestra1: list, muestra2: list, bins = 40, label1 = "1 operario"
 	plt.grid(True)
 	plt.show()
 
-def histogramas_2(muestra1: list, muestra2: list, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
-	"""Genera dos histogramas de dos muestras distintas uno al lado del otro."""
-	max_data = max(max(muestra1), max(muestra2))
-	fig, axs = plt.subplots(1, 2)
-	axs[0].hist(muestra1, bins=arange(0, max_data + bin_width, bin_width), edgecolor = 'black',color = "red")
-	axs[0].set_xlim(0, max_data)
-	axs[0].set_xlabel('Tiempo de vida del supermercado (meses)')
-	axs[0].set_ylabel('Frecuencias')
-	y1 = axs[0].get_ylim()[1]
+Genera un Histograma de comparación de un operario con S=3 máquinas de repuesto y S=4 máquinas de repuesto
+Tambien muestra la desviacion estandar generada y su media muestral para cada caso
+'''
+def histograma1():
 
-	axs[1].hist(muestra2, bins=arange(0, max_data + bin_width, bin_width), edgecolor = 'black',color  = "lime")
-	axs[1].set_xlim(0, max_data)
-	axs[1].set_xlabel('Tiempo de vida del supermercado (meses)')
-	axs[1].set_ylabel('Frecuencias')
-	y2 = axs[1].get_ylim()[1]
+	muestra1=estimar(7,3,1,1/8,1,10000)
+	muestra2=estimar(7,4,1,1/8,1,10000)
+
+	print("Un Operario considerando 3 cajas de repuesto (Rojo) ")
+	print("    Media muestral: ",muestra1[0])
+	print("    Desviacion estandar: ",muestra1[1])
+
+	print("Un Operario considerando 4 cajas de repuesto (Verde) ")
+	print("    Media muestral: ",muestra2[0])
+	print("    Desviacion estandar: ",muestra2[1])
 	
-	max_y = max(y1, y2)
-	axs[0].set_ylim(0, max_y)
-	axs[1].set_ylim(0, max_y)	
+	genera_histograma(muestra1[2],muestra2[2])
+
+'''
+Genera un Histograma de comparación de un operario y dos operarios con S=3 para ambos casos
+Tambien muestra la desviacion estandar generada y su media muestral para cada caso
+'''
+def histograma2():
+
+	muestra1=estimar(7,3,1,1/8,1,10000)
+	muestra2=estimar(7,3,1,1/8,2,10000)
+
+	print("Un Operario considerando 3 cajas de repuesto (Rojo) ")
+	print("    Media muestral: ",muestra1[0])
+	print("    Desviacion estandar: ",muestra1[1])
+
+	print("Dos Operarios considerando 3 cajas de repuesto (Verde) ")
+	print("    Media muestral: ",muestra2[0])
+	print("    Desviacion estandar: ",muestra2[1])
 	
-	plt.hist(muestra1, density=True, label=label1, color='red')
-	axs[0].grid(True)
-	plt.hist(muestra2, density=True, label=label2, color='lime')
-	axs[1].grid(True)
-	plt.legend(loc='upper right')
-	plt.show()
+	genera_histograma(muestra1[2],muestra2[2])
+
+'''
+Genera un Histograma de comparación de dos operarios en paralelo con tres cajas de repuesto y
+un operario con cuatro cajas de repuesto. Tambien muestra la desviacion estandar generada y su media muestral
+para cada caso
+'''
+def histograma3():	
+
+	muestra1=estimar(7,3,1,1/8,1,10000)
+	muestra2=estimar(7,4,2,1/8,1,10000)
+
+	print("Un Operario considerando 4 cajas de repuestos (Rojo) ")
+	print("    Media muestral: ",muestra1[0])
+	print("    Desviacion estandar: ",muestra1[1])
+
+	print("Dos Operarios considerando 3 cajas de repuestos (Verde) ")
+	print("    Media muestral: ",muestra2[0])
+	print("    Desviacion estandar: ",muestra2[1])
+	
+	genera_histograma(muestra1[2],muestra2[2])
+
+def mostrar_menu():
+	print("\nSeleccione el histograma y sus resultados que desea ver: \n")	
+
+	print("""    1. Histograma comparativo de 1 operario con S=3  y S=4 \n""")
+
+	print("""    2. Histograma comparativo de 1 y 2 operarios con S iguales\n""")
+    
+	print("""    3. Histograma comparativo de 2 operarios  con S=3 y 1 operario con S=4\n""")
+    
+	print("    4. Salir\n")
+
+def main():
+    
+	print("Informe de comparación de resultados del experimento")
+	mostrar_menu()
+
+while True:
+		mostrar_menu()
+		opcion = input("    Ingrese su opción: ")
+
+		if opcion == '1':
+			histograma1()
+
+		elif opcion == '2':
+			histograma2()
+
+		elif opcion == '3':
+			histograma3()
+		elif opcion == '4':
+			print("Saliendo del programa...")
+			break
+		else:
+			print("Opción no válida. Por favor, ingrese una opción válida.")
+
+if __name__ == "__main__":
+    main()
