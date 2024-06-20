@@ -48,7 +48,7 @@ def estimar(N: int, S: int, TF: float, TR: float, Operarios: int, NSim: int) -> 
 	desviacion_estandar = (suma / (NSim - 1))**0.5
 	return media, desviacion_estandar, muestra
 
-def genera_histograma(muestra1: list, muestra2: list, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
+def generar_histograma(muestra1: list, muestra2: list, label1 = "1 operario", label2 = "2 operarios", bin_width = 1):
 	"""Genera dos histogramas de dos muestras distintas en un mismo gráfico."""
 	max_data = max(max(muestra1), max(muestra2))
 	fig, axs = plt.subplots()
@@ -76,7 +76,7 @@ def histograma1():
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
 	
-	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "1 operario, S = 4")
+	generar_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "1 operario, S = 4")
 
 def histograma2():
 	"""Genera un Histograma de comparación de un operario y dos operarios con S=3 para ambos casos
@@ -92,7 +92,7 @@ def histograma2():
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
 	
-	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "2 operarios, S = 3")
+	generar_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 3", label2 = "2 operarios, S = 3")
 
 def histograma3():	
 	"""Genera un Histograma de comparación de dos operarios en paralelo con tres cajas de repuesto y
@@ -109,7 +109,7 @@ def histograma3():
 	print("    Media muestral: ",muestra2[0])
 	print("    Desviacion estandar: ",muestra2[1])
 	
-	genera_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 4", label2 = "2 operarios, S = 1")
+	generar_histograma(muestra1[2],muestra2[2], label1 = "1 operario, S = 4", label2 = "2 operarios, S = 1")
 
 def mostrar_menu():
 	print("\nSeleccione el histograma y sus resultados que desea ver: \n")	
